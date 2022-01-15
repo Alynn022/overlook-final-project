@@ -1,2 +1,12 @@
-$primary-background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+$primary-background: radial-gradient(circle, #D4C4E9 0%, #B397D8 100%);
 ;
+
+@mixin flex-center() {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
