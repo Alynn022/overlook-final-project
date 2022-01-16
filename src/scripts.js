@@ -20,14 +20,13 @@ let bookings;
 
 
 const loadPage = () => {
-  customerDashboardView.innerHTML = '';
   getData()
   .then((data) => {
-    let randomUser = data[0][getRandomIndex(data[0])];
+    let randomUser = data[0].customers[getRandomIndex(data[0].customers.length)];
     customers = new Customers(randomUser);
+    console.log(customers)
     rooms = new Rooms(data[1]);
     bookings = new Bookings(data[2]);
-    console.log(rooms)
   })
 };
 
@@ -35,8 +34,8 @@ const getData = () => {
   return Promise.all([fetchApiData('customers'), fetchApiData('rooms'), fetchApiData('bookings')])
 };
 
-const getRandomIndex = (array) => {
-  return Math.floor(Math.random() * array.length);
+const getRandomIndex = (length) => {
+  return Math.floor(Math.random() * length);
 };
 
 //EVENT LISTENERS

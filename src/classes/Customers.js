@@ -1,9 +1,10 @@
 
 class Customers {
-  constructor(id, name) {
-    this.id = id;
-    this.name = name;
+  constructor(customer) {
+    this.id = customer.id;
+    this.name = customer.name;
   }
+
 }
 
 export default Customers; 

@@ -3,10 +3,11 @@ import Customers from '../src/classes/Customers';
 const expect = chai.expect;
 
 describe('Customers', function() {
-  let customers
+  let customer1, customer2;
 
   beforeEach(() => {
-    customers = new Customers({"id":2,"name":"Rocio Schuster"})
+    customer1 = new Customers({"id":1,"name":"Leatha Ullrich"})
+    customer2 = new Customers({"id":2,"name":"Rocio Schuster"})
   }); 
 
   it('Should be a function', function() {
@@ -14,6 +15,12 @@ describe('Customers', function() {
   });
 
   it('Should be an instance of Customer', function() {
-    expect(customers).to.be.an.instanceOf(Customers);
+    expect(customer1).to.be.an.instanceOf(Customers);
   });
+
+  it('Should have an id', function() {
+    expect(customer1.id).to.equal(1);
+  });
+
+
 });
