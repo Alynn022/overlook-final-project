@@ -1,12 +1,9 @@
+const { bookingsData } = require("../data/bookings");
 
 class Bookings {
-  constructor(bookings) {
-    this.id = bookings.id;
-    this.userID = bookings.userID;
-    this.date = bookings.date;
-    this.roomNumber = bookings.roomNumber;
-    this.roomServiceCharges = bookings.roomServiceCharges;
+  constructor(bookingsData) {
+    this.bookingsData = bookingsData;
   }
 }
 
-export default Bookings; 
+export default Bookings;

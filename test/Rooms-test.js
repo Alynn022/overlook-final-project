@@ -1,19 +1,19 @@
 import chai from 'chai';
-import Rooms from '../src/classes/Rooms';
+import Room from '../src/classes/Room';
 const expect = chai.expect;
 
-describe('Rooms', function() {
-  let rooms;
+describe('Room', function() {
+  let room;
 
   this.beforeEach(() => {
-    rooms = new Rooms({"number":1,"roomType":"residential suite","bidet":true,"bedSize":"queen","numBeds":1,"costPerNight":358.4})
+    room = new Room({"number":1,"roomType":"residential suite","bidet":true,"bedSize":"queen","numBeds":1,"costPerNight":358.4})
   })
 
   it('Should be a function', function() {
-    expect(Rooms).to.be.a('function');
+    expect(Room).to.be.a('function');
   });
 
   it('Should be an instance of Bookings', function() {
-    expect(rooms).to.be.an.instanceOf(Rooms);
+    expect(room).to.be.an.instanceOf(Room);
   });
 });
