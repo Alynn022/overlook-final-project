@@ -4,10 +4,26 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webpack Starter Kit</title>
+  <title>Overlook Hotel Bookings</title>
 </head>
 <body>
-  <img src="./images/turing-logo.png" alt="turing logo">
+  <nav class="nav-bar">
+    <button class="home-btn">home</button>
+    <button>customer login</button>
+    <button>book a room</button>
+  </nav>
+  <header class="overlook-title"> 
+    <h1 class="homepage-title">Overlook Hotel Bookings</h1>
+    <img alt="travel image"> 
+  </header>
+  <article class="customer-dashboard-view" id="customerDashboardView">
+    <h2 class="dashboard-title">Customer Dashboard</h2>
+      <section class="all-room-bookings" id="allRoomBookings">
+        <h2 >All Room Bookings</h2>
+        <h3>Upcoming Reservations</h3>
+        <h3 id="roomBookingDetails">Past Reservations</h3>
+    </section>
+  </article>
   
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
