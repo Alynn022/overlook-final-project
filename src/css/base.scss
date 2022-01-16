@@ -3,7 +3,7 @@
 
 body {
   background: $primary-background;
-  
+
 }
 
 nav {
@@ -15,7 +15,7 @@ nav {
 }
 
 .overlook-title,
-.customer-dashboard {
+.customer-dashboard-view {
   @include flex-center
 }
 

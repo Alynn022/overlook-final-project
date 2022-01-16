@@ -10,10 +10,7 @@ describe('Booking', function() {
   let customer2;
 
   this.beforeEach(() => {
-    booking = new Booking([{"id":"5fwrgu4i7k55hl6t8","userID":1,"date":"2022/02/05","roomNumber":12,"roomServiceCharges":[]},
-    {"id":"5fwrgu4i7k55hl6x8","userID":1,"date":"2022/01/11","roomNumber":20,"roomServiceCharges":[]},
-    {"id":"5fwrgu4i7k55hl6uf","userID":2,"date":"2022/01/09","roomNumber":18,"roomServiceCharges":[]},
-    {"id":"5fwrgu4i7k55hl6uy","userID":2,"date":"2022/01/24","roomNumber":19,"roomServiceCharges":[]}])
+    booking = new Booking({"id":"5fwrgu4i7k55hl6t8","userID":1,"date":"2022/02/05","roomNumber":12,"roomServiceCharges":[]})
 
     customer1 = new Customer([{"id":1,"name":"Leatha Ullrich"}])
     customer2 = new Customer([{"id":2,"name":"Rocio Schuster"}])
@@ -27,4 +24,8 @@ describe('Booking', function() {
     expect(booking).to.be.an.instanceOf(Booking);
   });
 
+  it('Should sortDate', function() {
+    booking.sortDate();
+    expect(booking.date).to.deep.equal("02/05/2022");
+  });
 });

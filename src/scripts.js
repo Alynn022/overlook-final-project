@@ -2,9 +2,7 @@
 // Do not delete or rename this file ********
 import { fetchApiData } from './apiCalls';
 import Customer from './classes/Customer';
-import Booking from './classes/Booking';
-import Bookings from './classes/Bookings';
-import Room from './classes/Room';
+
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
 
@@ -14,40 +12,48 @@ import './images/turing-logo.png'
 //GET ELEMENTS BY ID 
 const customerDashboardView = document.getElementById('customerDashboardView')
 const allRoomBookings = document.getElementById('allRoomBookings')
+const roomBookingDetails = document.getElementById('roomBookingDetails')
 
 let customer;
-let room;
-let booking;
-let bookings;
 
 
 const loadPage = () => {
   getData()
   .then((data) => {
-    let randomUser = data[0].customers[getRandomIndex(data[0].customers.length)];
-    console.log('randomUser', randomUser)
-    customer = new Customer(randomUser);
-    console.log('cust', customer)
-    room = new Room(data[1]);
-    booking = new Booking(data[2]);
-    bookings = new Bookings(data[2]);
+    customer = new Customer(data.customers[0]);
     displayCustomerRoomDashboard();
   })
 };
 
 const getData = () => {
-  return Promise.all([fetchApiData('customers'), fetchApiData('rooms'), fetchApiData('bookings')])
+  return Promise.resolve(fetchApiData('customers'))
 };
 
 const displayCustomerRoomDashboard = () => {
-  customer.findBookings(bookings)
-  console.log(customer.findBookings(bookings))
-  // allRoomBookings.insertAdjacentHTML('afterend', ``)
-}
+  customer.findBookings().then(() => {
+  
+    customer.customerBookings.forEach(elem => {
+      let splitDate = elem.date.split('/') 
+      splitDate.splice(0, 0, splitDate[2]);
+      splitDate.pop();
+      splitDate.splice(0, 0, splitDate[2]);
+      splitDate.pop();
+      elem.date = splitDate.join('/')
+    })
 
-const getRandomIndex = (length) => {
-  return Math.floor(Math.random() * length);
-};
+      let sortedData = customer.customerBookings.sort((a, b) => {
+        return a.date - b.date
+      })
+
+      sortedData.forEach((elem) => {
+     roomBookingDetails.insertAdjacentHTML('afterEnd', `
+     <p>Date of your Stay: ${elem.date} Room Number: ${elem.roomNumber}`)
+    })
+  })
+}
+ 
+
+
 
 //EVENT LISTENERS
 
