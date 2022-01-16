@@ -14,6 +14,7 @@ const customerDashboardView = document.getElementById('customerDashboardView')
 const allRoomBookings = document.getElementById('allRoomBookings')
 const pastReservationsSection = document.getElementById('pastReservationsSection')
 const upcomingReservationsSection = document.getElementById('upcomingReservationsSection')
+const totalAmountSpentDisplay = document.getElementById('totalAmountSpentDisplay')
 
 let customer;
 
@@ -33,24 +34,24 @@ const getData = () => {
 const displayCustomerRoomDashboard = () => {
   customer.findBookings().then(() => {
   customer.rearrangeDate();
-  customer.pastReservations.forEach((elem) => {
-    pastReservationsSection.insertAdjacentHTML('afterEnd', `
-    <p>Date of your Stay: ${elem.date} Room Number: ${elem.roomNumber}`)
-    })
-  customer.upcomingReservations.forEach((elem) => {
-    upcomingReservationsSection.insertAdjacentHTML('afterEnd', `
-    <p>Date of your Stay: ${elem.date} Room Number: ${elem.roomNumber}`)
+  customer.getTotalAmountSpentOnRooms().then(() => {
+    let totalCost = customer.calculateRoomTotal();
+      totalAmountSpentDisplay.innerText = `$${totalCost}`
+
+    customer.pastReservations.forEach((elem) => {
+      pastReservationsSection.insertAdjacentHTML('afterEnd', `
+        <p>Date of your Stay: ${elem.date} Room Number: ${elem.roomNumber}`)
+     })
+    customer.upcomingReservations.forEach((elem) => {
+      upcomingReservationsSection.insertAdjacentHTML('afterEnd', `
+        <p>Date of your Stay: ${elem.date} Room Number: ${elem.roomNumber}`)
+      })
     })
   })
 }
 
-// customer.customerBookings.forEach(elem => {
-//   let splitDate = elem.date.split('/') 
-//   splitDate.splice(0, 0, splitDate[2]);
-//   splitDate.pop();
-//   splitDate.splice(0, 0, splitDate[2]);
-//   splitDate.pop();
-//   elem.date = splitDate.join('/')
+
+
 
 
 

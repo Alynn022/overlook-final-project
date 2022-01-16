@@ -1,5 +1,6 @@
 import { fetchApiData } from '../apiCalls';
 import Bookings from './Bookings';
+import Rooms from './Rooms';
 
 class Customer {
   constructor(customer) {
@@ -10,13 +11,13 @@ class Customer {
   }
   
   getData = () => {
-    return Promise.resolve(fetchApiData('bookings'))
+    return Promise.all([fetchApiData('bookings'), fetchApiData('rooms')])
   }
 
   findBookings() {
     return this.getData()
     .then((data) => {
-      let bookings = new Bookings(data.bookings)
+      let bookings = new Bookings(data[0].bookings)
       var today = new Date() 
       bookings.bookingsData.forEach((detail) => {
         var anotherDate = new Date(detail.date)
@@ -53,9 +54,33 @@ class Customer {
       elem.date = splitDate.join('/')
     })
   }
+  getTotalAmountSpentOnRooms() {
+    return this.getData()
+    .then((data) => {
+      let rooms = new Rooms(data[1].rooms)
+      this.pastReservations.forEach((elem) => {
+        rooms.roomsInformation.forEach((detail) => {
+          if (elem.roomNumber === detail.number) {
+            let totalCost = detail.costPerNight
+            elem['costOfRoom'] = totalCost
+          }
+        })
+      })
+    })
+  }
+  calculateRoomTotal() {
+    let result = this.pastReservations.reduce((acc, elem) => {
+      acc += elem.costOfRoom
+      return acc
+    }, 0)
+    return result 
+  }
 }
 
-
+//I want to get the past reservation's room number
+  //I want to get the room's array and return the 'number' and cost if the room number
+  //of the customer and the room's array is the same 
+  //reduce and add up all the total cost of the array 
 
 
 
