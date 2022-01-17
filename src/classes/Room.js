@@ -7,7 +7,8 @@ class Room {
     this.bedSize = roomDetails.bedSize;
     this.numBeds = roomDetails.numBeds;
     this.costPerNight = roomDetails.costPerNight;
-  }
+
+    }
 }
 
 export default Room; 

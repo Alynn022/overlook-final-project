@@ -10,7 +10,7 @@
   <nav class="nav-bar">
     <button class="home-btn">home</button>
     <button>customer login</button>
-    <button>book a room</button>
+    <button id="bookARoomBtn">book a room</button>
   </nav>
   <header class="overlook-title"> 
     <h1 class="homepage-title">Overlook Hotel Bookings</h1>
@@ -24,9 +24,12 @@
         <h3>Total Amount Spent on Rooms</h3>
           <p id="totalAmountSpentDisplay"></p>
         <h3 id="upcomingReservationsSection">Upcoming Reservations</h3>
-
     </section>
   </article>
+  <article class="book-a-room-view hidden" id="bookARoomView">
+
+  </article>
+  
   
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
