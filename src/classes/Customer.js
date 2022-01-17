@@ -73,15 +73,8 @@ class Customer {
       acc += elem.costOfRoom
       return acc
     }, 0)
-    return result 
+    return result.toFixed(2)
   }
 }
-
-//I want to get the past reservation's room number
-  //I want to get the room's array and return the 'number' and cost if the room number
-  //of the customer and the room's array is the same 
-  //reduce and add up all the total cost of the array 
-
-
 
 export default Customer; 

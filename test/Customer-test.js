@@ -1,18 +1,12 @@
 import chai from 'chai';
 import Customer from '../src/classes/Customer';
-import Booking from '../src/classes/Booking';
-import Bookings from '../src/classes/Bookings';
 
 const expect = chai.expect;
 
 describe('Customer', function() {
-  let customer1, customer2, booking1, booking2;
+  let customer1, customer2;
 
   beforeEach(() => {
-
-    booking1 = new Booking({"id":"5fwrgu4i7k55hl6t8","userID":1,"date":"2022/02/05","roomNumber":12,"roomServiceCharges":[]})
-    booking2 = new Booking({"id":"5fwrgu4i7k55hl6x8","userID":1,"date":"2022/01/11","roomNumber":20,"roomServiceCharges":[]})
-
     customer1 = new Customer({"id":1,"name":"Leatha Ullrich"})
     customer2 = new Customer({"id":2,"name":"Rocio Schuster"})
   }); 
@@ -35,9 +29,19 @@ describe('Customer', function() {
     expect(customer2.name).to.equal("Rocio Schuster");
   });
 
-  it('Should be able to find customers bookings by customer Id', function() { 
-   
-    // expect(customer1.findBookings()).to.include.members([booking1, booking2])
+  it('Should be able to rearrange dates to another format', function() { 
+    customer1.pastReservations.push({"id":"5fwrgu4i7k55hl6x8","userID":1,"date":"2022/01/11","roomNumber":20,"roomServiceCharges":[]})
+    customer1.rearrangeDate();
+
+    expect(customer1.pastReservations[0].date).to.deep.equal("01/11/2022")
+  });
+
+  it('Should be able to calculate the room total', function() { 
+    customer1.pastReservations.push({"id":"5fwrgu4i7k55hl6x8","userID":1,"date":"2022/01/11","roomNumber":20,"roomServiceCharges":[], "costOfRoom": 207.67})
+    customer1.pastReservations.push({"id":"5fwrgu4i7k55hl6t8","userID":1,"date":"2022/02/05","roomNumber":12,"roomServiceCharges":[], "costOfRoom": 300.00})
+    customer1.calculateRoomTotal();
+
+    expect(customer1.calculateRoomTotal()).to.deep.equal('507.67')
   });
 
 });
