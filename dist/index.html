@@ -18,21 +18,36 @@
   </header>
   <article class="customer-dashboard-view" id="customerDashboardView">
     <h2 class="dashboard-title">Customer Dashboard</h2>
-      <section class="all-room-bookings" id="allRoomBookings">
-        <h2 >All Room Bookings</h2>
-        <h3 id="pastReservationsSection">Past Reservations</h3>
-        <h3>Total Amount Spent on Rooms</h3>
-          <p id="totalAmountSpentDisplay"></p>
-        <h3 id="upcomingReservationsSection">Upcoming Reservations</h3>
+    <section class="all-room-bookings" id="allRoomBookings">
+      <h2 >All Room Bookings</h2>
+      <h3 id="pastReservationsSection">Past Reservations</h3>
+      <h3>Total Amount Spent on Rooms</h3>
+      <p id="totalAmountSpentDisplay"></p>
+      <h3 id="upcomingReservationsSection">Upcoming Reservations</h3>
     </section>
   </article>
   <article class="book-a-room-view hidden" id="bookARoomView">
+    <label for="start">Find a booking date:</label>
+    <input type="date" id="start" name="trip-start"
+       value=""
+       min="2022-01-16" max="2022-12-31"/>
+       <button id="dateSelectBtn" [disabled]="!myInput.value">Submit</button>
+       <div class="dropdown">
+        <button id="dropDownButton" class="dropbtn">Search By Room Type</button>
+        <div id="myDropdown" class="dropdown-content">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+      <article id="roomsAvailableDisplay">
 
+      </article>
   </article>
   
   
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
-
+  
 </body>
 </html>

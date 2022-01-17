@@ -17,4 +17,10 @@ describe('Bookings', function() {
     expect(bookings).to.be.an.instanceOf(Bookings);
   });
 
+  it('Should be able to find available bookings', function() {
+    // bookings.showCustomerRoomAvailability('2022-02-05')
+
+
+  });
+
 });
