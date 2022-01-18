@@ -10,14 +10,32 @@
 <body>
   <nav class="nav-bar">
     <button class="home-btn" id="homeBtn">home</button>
-    <button class="customer-login-btn" id="customerLoginBtn">customer dashboard</button>
-    <button class="book-a-room-btn" id="bookARoomBtn">book a room</button>
+    <button class="customer-login-btn" id="customerLoginBtn">customer login</button>
+    <button class="book-a-room-btn hidden" id="bookARoomBtn">book a room</button>
   </nav>
   <header class="overlook-title"> 
     <h1 class="welcome-title">Welcome to</h1>
     <h1 class="homepage-title">Overlook Hotel Bookings</h1>
   </header>
   <article class="home-page-view" id="homePageView">
+
+    <div class="container hidden" id="loginForm">
+      <section id="content">
+        <form action="">
+          <h1>Login Form</h1>
+          <div>
+            <input type="text" placeholder="Username" required="" id="username" />
+          </div>
+          <div>
+            <input type="password" placeholder="Password" required="" id="password" />
+          </div>
+          <div>
+            <input type="submit" value="Log in" id="loginFormBtn"/>
+          </div>
+        </form><!-- form -->
+        
+      </section><!-- content -->
+    </div><!-- container -->
     <img src="./images/img1.jpg" alt="hotel main lobby" style="width:100%">
     <img src="./images/img2.jpg" alt="hotel pool side" style="width:100%">
     <img src="./images/img3.jpg" alt="hotel pool side restaurant" style="width:100%">
@@ -50,7 +68,7 @@
         <h2 id="errorLine"></h2>
       </article>
       <article class="room-has-been-booked-display hidden" id="roomHasBeenBookedDisplay">
-          <img alt="Room has been booked sign">
+          <img alt="Thank you for booking sign" src="./images/thankyou.jpg" style="align-items:center">
           <h1>Your Room Has Been Booked! Please select another date to book.</h1>
       </article>
   </article>

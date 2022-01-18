@@ -11,7 +11,7 @@ class Customer {
   }
   
   getData = () => {
-    return Promise.all([fetchApiData('bookings'), fetchApiData('rooms')])
+    return Promise.all([fetchApiData('bookings'), fetchApiData('rooms'), fetchApiData('customers')])
   }
 
   findBookings() {
@@ -75,6 +75,11 @@ class Customer {
     }, 0)
     return result.toFixed(2)
   }
+  // retrieveCustomerInformation(userInput) {
+  //   return this.getData()
+  //   .then((data) => {
+  //     if (userInput === `customer${this.id}`)
+  // }
 }
 
 export default Customer; 

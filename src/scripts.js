@@ -11,6 +11,7 @@ import './css/base.scss';
 import './images/img1.jpg'
 import './images/img2.jpg'
 import './images/img3.jpg'
+import './images/thankyou.jpg'
 
 
 //DISPLAYS
@@ -23,6 +24,7 @@ const roomsAvailableDisplay = document.getElementById('roomsAvailableDisplay')
 const roomHasBeenBookedDisplay = document.getElementById('roomHasBeenBookedDisplay')
 const errorLine = document.getElementById('errorLine')
 const homePageView = document.getElementById('homePageView')
+const loginForm = document.getElementById('loginForm')
 
 //BUTTONS
 const bookARoomBtn = document.getElementById('bookARoomBtn')
@@ -31,30 +33,50 @@ const dropDownBtn = document.getElementById('dropDownBtn');
 const myDropdown = document.getElementById('myDropdown');
 const homeBtn = document.getElementById('homeBtn')
 const customerLoginBtn = document.getElementById('customerLoginBtn')
+const loginFormBtn = document.getElementById('loginFormBtn')
 
+const usernameText = document.getElementById('username')
+const passwordText = document.getElementById('password')
 
 var today = new Date().toISOString().slice(0, 10).split('-').join('/') 
 var dateControl = document.querySelector('input[type="date"]');
 
+
 let customer;
+let customers;
 let bookings;
 
 
 const loadPage = () => {
   getData()
   .then((data) => {
-    customer = new Customer(data[0].customers[0]);
+    customers = new Customer(data[0].customers);
     bookings = new Bookings(data[1].bookings)
   })
   hide([homeBtn])
+  
 };
 
 const getData = () => {
   return Promise.all([fetchApiData('customers'), fetchApiData('bookings')])
 };
 
+const customerLogin = (event) => {
+  event.preventDefault();
+  disableLoginButton();
+  getData()
+  .then((data) => { 
+  let newCustomer = data[0].customers.find((elem) => (usernameText.value === `customer${elem.id}`) && (passwordText.value === "overlook2021"))
+  customer = new Customer(newCustomer)
+  })
+  .then(() => {
+    displayCustomerRoomDashboard()
+  }) 
+}
+
 const displayCustomerRoomDashboard = () => {
   displayCustomerDashboardView();
+  console.log(customer)
   customer.findBookings().then(() => {
   customer.rearrangeDate();
   customer.getTotalAmountSpentOnRooms().then(() => {
@@ -73,6 +95,17 @@ const displayCustomerRoomDashboard = () => {
   })
 }
 
+const disableLoginButton = () => {
+  if (!passwordText.value || !usernameText.value) {
+    loginFormBtn.disabled = true
+    alert("Please Enter A Valid Username or Password")
+    loginFormBtn.disabled = false
+  } else if ((!usernameText.value.includes('customer') || passwordText.value !== "overlook2021")) {
+    loginFormBtn.disabled = true
+    alert("Please Enter A Valid Username or Password")
+    loginFormBtn.disabled = false
+  }
+}
 
 const disableSubmitButton = () => {
   if (!dateControl.value) {
@@ -198,7 +231,7 @@ const showBookARoomView = () => {
 
 const displayRoomHasBeenBooked = () => {
   show([roomHasBeenBookedDisplay, homeBtn])
-  hide([roomsAvailableDisplay])
+  hide([roomsAvailableDisplay, dropDownBtn])
 }
 
 const displayBookARoomOnSubmit = () => {
@@ -207,13 +240,17 @@ const displayBookARoomOnSubmit = () => {
 }
 
 const displayHomePage = () => {
-  show([homePageView])
-  hide([homeBtn, customerDashboardView, bookARoomView, roomsAvailableDisplay, roomHasBeenBookedDisplay])
+  show([homePageView, customerLoginBtn])
+  hide([homeBtn, customerDashboardView, bookARoomView, roomsAvailableDisplay, roomHasBeenBookedDisplay, bookARoomBtn])
 }
 
 const displayCustomerDashboardView = () => {
-  show([customerDashboardView, homeBtn])
-  hide([homePageView, customerLoginBtn])
+  show([customerDashboardView, homeBtn, bookARoomBtn])
+  hide([homePageView, customerLoginBtn, loginForm])
+}
+
+const displayLoginForm = () => {
+  show([loginForm])
 }
 
 //EVENT LISTENERS
@@ -224,4 +261,5 @@ dateSelectBtn.addEventListener('click', displayBookARoomInformation);
 myDropdown.addEventListener('click', searchByRoomTypes);
 dropDownBtn.addEventListener('click', showDropDown);
 homeBtn.addEventListener('click', displayHomePage)
-customerLoginBtn.addEventListener('click', displayCustomerRoomDashboard)
+customerLoginBtn.addEventListener('click', displayLoginForm)
+loginFormBtn.addEventListener('click', customerLogin)
