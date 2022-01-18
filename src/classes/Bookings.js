@@ -20,7 +20,6 @@ class Bookings {
     .then((data) => {
       let bookings = new Bookings(data[0].bookings)
       let rooms = new Rooms(data[1].rooms)
-      console.log('rooms', rooms.roomsInformation)
       let roomsWithSameDate = bookings.bookingsData.filter((booking) => {
         if (userInput === booking.date) {
           return booking
@@ -29,7 +28,6 @@ class Bookings {
         const results = rooms.roomsInformation.filter(({ number: id1 }) => 
         !roomsWithSameDate.some(({ roomNumber: id2 }) => id2 === id1));
         this.roomsAvailable = results
-        console.log(this.roomsAvailable)
         
         results.forEach((elem) => {
           if (!this.roomTypesAvailable.includes(elem.roomType))
@@ -60,26 +58,14 @@ class Bookings {
       }
     })
   }
+  
 }
 
-// if (room.roomType === 'residential suite') {
-//   roomsAvailableDisplay.innerHTML += `<img src='./images/Residential-Suite.jpg'>
-//   <h1>Room Type: ${room.roomType} Has a Bidet: ${room.bidet}
-//   Bed Size: ${room.bedSize} Number Of Beds: ${room.numBeds}</h1>`
-//   }
-//   if (room.roomType === 'junior suite') {
-//     roomsAvailableDisplay.innerHTML += `<img src='./images/Junior-Suite.jpg'>
-//     <h1>Room Type: ${room.roomType} Has a Bidet: ${room.bidet}
-//     Bed Size: ${room.bedSize} Number Of Beds: ${room.numBeds}</h1>`
-//   }
-//   if (room.roomType === 'single room') {
-//     roomsAvailableDisplay.innerHTML += `<img src='./images/Single-Room.jpg'>
-//     <h1>Room Type: ${room.roomType} Has a Bidet: ${room.bidet}
-//     Bed Size: ${room.bedSize} Number Of Beds: ${room.numBeds}</h1>`
-//   }
-//   if (room.roomType === 'suite') {
-//     roomsAvailableDisplay.innerHTML += `<img src='./images/Suite.jpg'>
-//     <h1>Room Type: ${room.roomType} Has a Bidet: ${room.bidet}
-//     Bed Size: ${room.bedSize} Number Of Beds: ${room.numBeds}</h1>`
+//I want to make the bookThisRoomBtn.value dynamic by passing in the value as 
+  //parameter 
+  //I want to creat a fetch and post method for the individual info. 
+  //based on the customer UserID 
+  //I need this to post 
+  //{ "userID": 48, "date": "2019/09/23", "roomNumber": 4 }
 
 export default Bookings;
