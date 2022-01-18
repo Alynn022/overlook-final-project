@@ -19,6 +19,11 @@ nav {
   @include flex-center
 }
 
+.rooms-available-display {
+  display: flex;
+  flex-direction: column;
+}
+
 .dashboard-title {
   background-color: white;
   width: 25em;
@@ -75,6 +80,11 @@ nav {
 
 .show {
   display: block;
+}
+
+img {
+  width: 50%;
+  height: 40%;
 }
 
 .hidden {
