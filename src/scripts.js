@@ -8,7 +8,9 @@ import Customer from './classes/Customer';
 import './css/base.scss';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
-// import './images/Junior-Suite.jpg'
+import './images/img1.jpg'
+import './images/img2.jpg'
+import './images/img3.jpg'
 
 
 //DISPLAYS
@@ -20,14 +22,15 @@ const bookARoomView = document.getElementById('bookARoomView')
 const roomsAvailableDisplay = document.getElementById('roomsAvailableDisplay')
 const roomHasBeenBookedDisplay = document.getElementById('roomHasBeenBookedDisplay')
 const errorLine = document.getElementById('errorLine')
+const homePageView = document.getElementById('homePageView')
 
 //BUTTONS
 const bookARoomBtn = document.getElementById('bookARoomBtn')
 const dateSelectBtn = document.getElementById('dateSelectBtn')
 const dropDownBtn = document.getElementById('dropDownBtn');
 const myDropdown = document.getElementById('myDropdown');
-
-const roomsAvailableTitle = document.getElementById("roomsAvTitle")
+const homeBtn = document.getElementById('homeBtn')
+const customerLoginBtn = document.getElementById('customerLoginBtn')
 
 
 var today = new Date().toISOString().slice(0, 10).split('-').join('/') 
@@ -42,8 +45,8 @@ const loadPage = () => {
   .then((data) => {
     customer = new Customer(data[0].customers[0]);
     bookings = new Bookings(data[1].bookings)
-    displayCustomerRoomDashboard();
   })
+  hide([homeBtn])
 };
 
 const getData = () => {
@@ -51,6 +54,7 @@ const getData = () => {
 };
 
 const displayCustomerRoomDashboard = () => {
+  displayCustomerDashboardView();
   customer.findBookings().then(() => {
   customer.rearrangeDate();
   customer.getTotalAmountSpentOnRooms().then(() => {
@@ -89,13 +93,13 @@ const displayBookARoomInformation = () => {
       if (bookings.roomsAvailable) {
         bookings.assignImageToRoomType();
         bookings.roomsAvailable.forEach((room) => {
-          roomsAvailableDisplay.innerHTML += `<section><img src=${room.image} style="float:left" tabindex= "0">
+          roomsAvailableDisplay.innerHTML += `<section class="room-display"><img src=${room.image} style="float:left" tabindex= "0">
           <p>Room Type: ${room.roomType}</p> 
           <p>Has a Bidet: ${room.bidet}</p>
           <p>Bed Size: ${room.bedSize}</p>
           <p>Number Of Beds: ${room.numBeds}</p> 
           <p>Cost Per Night: $${room.costPerNight}</p>
-          <button id="bookThisRoomBtn-${room.number}" value="${room.number}">Book This Room</button></section>`
+          <button class="book-btn" id="bookThisRoomBtn-${room.number}" value="${room.number}">Book This Room</button></section>`
         })
           bookings.roomsAvailable.forEach((room) => { 
           bookThisRoomBtn = document.getElementById(`bookThisRoomBtn-${room.number}`)
@@ -124,17 +128,15 @@ const searchByRoomTypes = (event) => {
   myDropdown.innerHTML = ``
   roomsAvailableDisplay.innerHTML = ``
   bookings.assignImageToRoomType();
-  console.log('roomsav', bookings.roomsAvailable)
   bookings.roomsAvailable.forEach((room) => {
     if (event.target.className === room.roomType) {
-      console.log("hello")
-      roomsAvailableDisplay.innerHTML += `<section><img src=${room.image} style="float:left" tabindex= "0">
+      roomsAvailableDisplay.innerHTML += `<section class="room-display"><img src=${room.image} style="float:left" tabindex= "0">
       <p>Room Type: ${room.roomType}</p> 
       <p>Has a Bidet: ${room.bidet}</p>
       <p>Bed Size: ${room.bedSize}</p>
       <p>Number Of Beds: ${room.numBeds}</p> 
       <p>Cost Per Night: $${room.costPerNight}</p>
-      <button id="bookThisRoomBtn2-${room.number}" value="${room.number}">Book This Room</button></section>`
+      <button class="book-btn" id="bookThisRoomBtn2-${room.number}" value="${room.number}">Book This Room</button></section>`
     }
   })
   bookings.roomsAvailable.forEach((room) => { 
@@ -164,7 +166,6 @@ const bookThisRoomPostApi = (roomNumber) => {
   .catch(err => {
     displayServerErrorMessage(err)
   });
-  console.log('posted')
   displayRoomHasBeenBooked();
 }
 
@@ -191,18 +192,28 @@ const displayBookARoomCalendar = () => {
 }
 
 const showBookARoomView = () => {
-  show([bookARoomView])
-  hide([customerDashboardView, bookARoomBtn])
+  show([bookARoomView, homeBtn])
+  hide([customerDashboardView, bookARoomBtn, homePageView, roomsAvailableDisplay, roomHasBeenBookedDisplay])
 }
 
 const displayRoomHasBeenBooked = () => {
-  show([roomHasBeenBookedDisplay])
+  show([roomHasBeenBookedDisplay, homeBtn])
   hide([roomsAvailableDisplay])
 }
 
 const displayBookARoomOnSubmit = () => {
-  show([roomsAvailableDisplay, dropDownBtn, roomsAvailableTitle])
+  show([roomsAvailableDisplay, dropDownBtn, homeBtn])
   hide([roomHasBeenBookedDisplay])
+}
+
+const displayHomePage = () => {
+  show([homePageView])
+  hide([homeBtn, customerDashboardView, bookARoomView, roomsAvailableDisplay, roomHasBeenBookedDisplay])
+}
+
+const displayCustomerDashboardView = () => {
+  show([customerDashboardView, homeBtn])
+  hide([homePageView, customerLoginBtn])
 }
 
 //EVENT LISTENERS
@@ -212,3 +223,5 @@ bookARoomBtn.addEventListener('click', displayBookARoomCalendar);
 dateSelectBtn.addEventListener('click', displayBookARoomInformation);
 myDropdown.addEventListener('click', searchByRoomTypes);
 dropDownBtn.addEventListener('click', showDropDown);
+homeBtn.addEventListener('click', displayHomePage)
+customerLoginBtn.addEventListener('click', displayCustomerRoomDashboard)

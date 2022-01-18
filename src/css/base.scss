@@ -3,14 +3,21 @@
 
 body {
   background: $primary-background;
+  font-size: 20px;
+}
+
+button {
+  background: $section-background-color;
+  font-family: $button-font;
+  box-shadow: none;
+  font-size: 14px;
 }
 
 nav {
   width: 100%;
   height: 2em;
-  background-color: white;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 .overlook-title,
@@ -23,14 +30,65 @@ nav {
   flex-direction: column;
 }
 
+.welcome-title {
+  color: $primary-font-color;
+}
+
+.customer-login-btn, 
+.home-btn,
+.book-a-room-btn,
+.book-btn {
+  @include button-options()
+}
+
+.customer-login-btn, 
+.home-btn,
+.book-a-room-btn {
+  width: 140px;
+  height: 45px;
+}
+
+.book-btn {
+  width: 140px;
+  height: 42px;
+  border: 1px solid black;
+}
+
+.book-btn:hover,
+.book-btn:focus,
+.customer-login-btn:hover,
+.customer-login-btn:focus,
+.home-btn:hover, 
+.home-btn:focus,
+.book-a-room-btn:hover,
+.book-a-room-btn:focus {
+  background-color: $border-color;
+  box-shadow: 0px 15px 20px #0F5298;
+  color: #fff;
+  transform: translateY(-7px);
+}
+
+.room-display {
+  margin: 20px;
+  background-color: $section-background-color;
+  width: 88%;
+  border: 13px solid $border-color;
+}
+
+.welcome-title,
+.homepage-title {
+ @include title-font
+}
+
+
 .dashboard-title {
-  background-color: white;
+  background-color: $section-background-color;
   width: 25em;
   text-align: center;
 }
 
 .all-room-bookings {
-  background-color: white;
+  background-color: $section-background-color;
   width: 75%;
   height: fit-content;
 }
