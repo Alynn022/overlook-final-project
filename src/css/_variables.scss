@@ -1,5 +1,10 @@
-$primary-background: radial-gradient(circle, #D4C4E9 0%, #B397D8 100%);
-;
+$primary-background: linear-gradient(#2565AE 0%, #66D3FA 20%);
+
+$primary-font-color: #D5F3FE;
+
+$button-font: 'Roboto', sans-serif;
+$border-color: #3C99DC;
+$section-background-color:#fff; 
 
 @mixin flex-center() {
   display: flex;
@@ -10,3 +15,24 @@ $primary-background: radial-gradient(circle, #D4C4E9 0%, #B397D8 100%);
   align-items: center;
 }
 
+@mixin title-font() {
+  font-family: 'Mrs Saint Delafield', cursive;
+  font-size: 100px;
+  margin: 0;
+}
+
+@mixin button-options() {
+  font-family: $button-font;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}

@@ -4,19 +4,26 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">
   <title>Overlook Hotel Bookings</title>
 </head>
 <body>
   <nav class="nav-bar">
-    <button class="home-btn">home</button>
-    <button>customer login</button>
-    <button id="bookARoomBtn">book a room</button>
+    <button class="home-btn" id="homeBtn">home</button>
+    <button class="customer-login-btn" id="customerLoginBtn">customer dashboard</button>
+    <button class="book-a-room-btn" id="bookARoomBtn">book a room</button>
   </nav>
   <header class="overlook-title"> 
+    <h1 class="welcome-title">Welcome to</h1>
     <h1 class="homepage-title">Overlook Hotel Bookings</h1>
-    <img alt="travel image"> 
   </header>
-  <article class="customer-dashboard-view" id="customerDashboardView">
+  <article class="home-page-view" id="homePageView">
+    <img src="./images/img1.jpg" alt="hotel main lobby" style="width:100%">
+    <img src="./images/img2.jpg" alt="hotel pool side" style="width:100%">
+    <img src="./images/img3.jpg" alt="hotel pool side restaurant" style="width:100%">
+  </article>
+
+  <article class="customer-dashboard-view hidden" id="customerDashboardView">
     <h2 class="dashboard-title">Customer Dashboard</h2>
     <section class="all-room-bookings" id="allRoomBookings">
       <h2 >All Room Bookings</h2>
@@ -31,17 +38,20 @@
     <input type="date" id="start" name="trip-start"
        value=""
        min="2022-01-16" max="2022-12-31"/>
-       <button id="dateSelectBtn" [disabled]="!myInput.value">Submit</button>
+       <button id="dateSelectBtn" [disabled]="!myInput.value">Search Dates</button>
        <div class="dropdown">
-        <button id="dropDownButton" class="dropbtn">Search By Room Type</button>
+        <button id="dropDownBtn" class="dropbtn hidden">Filter By Room Type</button>
         <div id="myDropdown" class="dropdown-content">
-          <a href="#home">Home</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
+          <a href="#Test">Test</a>
         </div>
       </div>
-      <article id="roomsAvailableDisplay">
-
+      <article class="rooms-available-display" id="roomsAvailableDisplay">
+        <h1 class=" hidden" id="roomsAvTitle">Rooms Available for Booking</h1>
+        <h2 id="errorLine"></h2>
+      </article>
+      <article class="room-has-been-booked-display hidden" id="roomHasBeenBookedDisplay">
+          <img alt="Room has been booked sign">
+          <h1>Your Room Has Been Booked! Please select another date to book.</h1>
       </article>
   </article>
   
