@@ -254,7 +254,6 @@ window.addEventListener('load', loadPage);
 bookARoomBtn.addEventListener('click', displayBookARoomCalendar);
 dateSelectBtn.addEventListener('click', displayBookARoomInformation);
 myDropdown.addEventListener('click', searchByRoomTypes);
-dropDownBtn.addEventListener('click', showDropDown);
 homeBtn.addEventListener('click', displayHomePage);
 customerLoginBtn.addEventListener('click', displayLoginForm);
 loginFormBtn.addEventListener('click', customerLogin);

@@ -17,4 +17,10 @@ describe('Bookings', function() {
     expect(bookings).to.be.an.instanceOf(Bookings);
   });
 
+  it('Should assign a property of image to the Booking', function() {
+    bookings.roomsAvailable.push({"number": 1, "roomType": "residential suite", "bidet": true, "bedSize": "queen", "numBeds": 1, "costPerNight": 358.4})
+
+    bookings.assignImageToRoomType();
+    expect(bookings.roomsAvailable[0].image).to.deep.equal('../images/Residential-Suite.jpg');
+  });
 });
