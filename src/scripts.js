@@ -46,8 +46,9 @@ const loadPage = () => {
     customer = new Customer(data[0].customers[0]);
     bookings = new Bookings(data[1].bookings)
   })
-  hide([homeBtn])
-};
+  .then(() =>
+  displayCustomerRoomDashboard());
+};  
 
 const getData = () => {
   return Promise.all([fetchApiData('customers'), fetchApiData('bookings')])
@@ -94,11 +95,13 @@ const displayBookARoomInformation = () => {
         bookings.assignImageToRoomType();
         bookings.roomsAvailable.forEach((room) => {
           roomsAvailableDisplay.innerHTML += `<section class="room-display"><img src=${room.image} style="float:left" tabindex= "0">
-          <p>Room Type: ${room.roomType}</p> 
-          <p>Has a Bidet: ${room.bidet}</p>
-          <p>Bed Size: ${room.bedSize}</p>
-          <p>Number Of Beds: ${room.numBeds}</p> 
-          <p>Cost Per Night: $${room.costPerNight}</p>
+          <ol>
+            <li>Room Type: ${room.roomType}</li> 
+            <li>Has a Bidet: ${room.bidet}</li>
+            <li>Bed Size: ${room.bedSize}</li>
+            <li>Number Of Beds: ${room.numBeds}</li> 
+            <li>Cost Per Night: $${room.costPerNight}</li>
+          </ol>
           <button class="book-btn" id="bookThisRoomBtn-${room.number}" value="${room.number}">Book This Room</button></section>`
         })
           bookings.roomsAvailable.forEach((room) => { 
@@ -131,11 +134,13 @@ const searchByRoomTypes = (event) => {
   bookings.roomsAvailable.forEach((room) => {
     if (event.target.className === room.roomType) {
       roomsAvailableDisplay.innerHTML += `<section class="room-display"><img src=${room.image} style="float:left" tabindex= "0">
-      <p>Room Type: ${room.roomType}</p> 
-      <p>Has a Bidet: ${room.bidet}</p>
-      <p>Bed Size: ${room.bedSize}</p>
-      <p>Number Of Beds: ${room.numBeds}</p> 
-      <p>Cost Per Night: $${room.costPerNight}</p>
+      <ol>
+        <li>Room Type: ${room.roomType}</li> 
+        <li>Has a Bidet: ${room.bidet}</li>
+        <li>Bed Size: ${room.bedSize}</li>
+        <li>Number Of Beds: ${room.numBeds}</li> 
+        <li>Cost Per Night: $${room.costPerNight}</li>
+      </ol>
       <button class="book-btn" id="bookThisRoomBtn2-${room.number}" value="${room.number}">Book This Room</button></section>`
     }
   })
