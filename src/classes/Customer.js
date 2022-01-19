@@ -11,9 +11,8 @@ class Customer {
   }
   
   getData = () => {
-    return Promise.all([fetchApiData('bookings'), fetchApiData('rooms')])
+    return Promise.all([fetchApiData('bookings'), fetchApiData('rooms'), fetchApiData('customers')])
   }
-
   findBookings() {
     return this.getData()
     .then((data) => {

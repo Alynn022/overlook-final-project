@@ -6,7 +6,7 @@ describe('Rooms', function() {
   let rooms;
 
   this.beforeEach(() => {
-    rooms = new Rooms({"number":1,"roomType":"residential suite","bidet":true,"bedSize":"queen","numBeds":1,"costPerNight":358.4})
+    rooms = new Rooms({"number": 1, "roomType": "residential suite", "bidet": true, "bedSize": "queen", "numBeds": 1, "costPerNight": 358.4})
   })
 
   it('Should be a function', function() {
