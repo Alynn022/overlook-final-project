@@ -15,8 +15,7 @@ This application is a solo project to build a hotel management tool for hotel cu
 
 ## Setup
   
-- Clone this repository down to your local machine to retrieve data first
-- ![this](https://github.com/turingschool-examples/overlook-api)
+- Clone [this](https://github.com/turingschool-examples/overlook-api) repository down to your local machine to retrieve data first
 - Run `npm install`
 - Run npm `start` 
 
@@ -25,20 +24,31 @@ This application is a solo project to build a hotel management tool for hotel cu
 - Run `npm install`
 - Run npm `start` 
 - Copy `http:localhost//` in your browser to run live preview 
+- login with username: customer(1-50) password: overlook2021
+  - This will give you the user's past and present bookings, and allow you access to update the api data. 
 - Run `open index.html` in the terminal to test application
    
 ## Screenshots  
-Users can view homepage and then login. 
-![home-view](https://media.giphy.com/media/VVUulILI1qrqfJMNMO/giphy.gif)
+Home Page View
+
+![home-view](https://media.giphy.com/media/tlDOcpoQ4NxT6HwaLh/giphy.gif)
    
-Users can favorite a recipe and view it.  
-![favorite-recipe](https://media.giphy.com/media/TXCEzLU1TlZFqygyWl/giphy.gif)
+Users can login with their customerID and password.  
 
-Users can click on a recipe in the list to see the directions and instructions. 
-![recipe-info](https://media.giphy.com/media/s16Wyree4SJmhXHoJW/giphy.gif)
+![user-login](https://media.giphy.com/media/27ZtvAjxaoKpUk8Pr6/giphy.gif)
 
-Users can use the dropdown to search through filtered tags for recipes
-![search-recipe](https://media.giphy.com/media/f3u6W3L0qkazOnvYlQ/giphy.gif)
+Users can view their past and upcoming reservations at the customer dashboard.
+
+![customer-dashboard](https://media.giphy.com/media/V94gz3krvIb43aMg0F/giphy.gif)
+
+Users can book a room and select a room to book. 
+
+![book-room](https://media.giphy.com/media/e2NJZLgzvMIHpqzEBj/giphy.gif)
+
+Users can filter by room types. 
+
+![filter-search](https://media.giphy.com/media/odnXBjNF3wKSxHGdqU/giphy.gif)
+
 
 ## Links  
 Checkout the Turing spec sheet [here](https://frontend.turing.edu/projects/overlook.html)
@@ -61,5 +71,3 @@ Fetch API
 Webpack
 
 SASS 
-
-ESLint
