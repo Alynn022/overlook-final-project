@@ -21,6 +21,7 @@ const errorLine = document.getElementById('errorLine')
 const homePageView = document.getElementById('homePageView')
 const loginForm = document.getElementById('loginForm')
 const start = document.getElementById('start')
+const justBookedDisplay = document.getElementById('justBookedDisplay')
 
 //BUTTONS
 const bookARoomBtn = document.getElementById('bookARoomBtn')
@@ -32,12 +33,14 @@ const customerLoginBtn = document.getElementById('customerLoginBtn')
 const loginFormBtn = document.getElementById('loginFormBtn')
 const usernameText = document.getElementById('username')
 const passwordText = document.getElementById('password')
+const customerDashboardBtn = document.getElementById('customerDashboardBtn')
 
 var today = new Date().toISOString().slice(0, 10).split('-').join('/') 
 var dateControl = document.querySelector('input[type="date"]');
 
 let customer;
 let bookings;
+
 
 
 const loadPage = () => {
@@ -67,13 +70,15 @@ const customerLogin = (event) => {
 }
 
 const bookThisRoomPostApi = (roomNumber) => {
+  let splitDate = dateControl.value.split("-")
+  let joinDate = splitDate.join("/")
   let newRoomNumber = parseInt(roomNumber)
   fetch('http://localhost:3001/api/v1/bookings', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       "userID": customer.id,
-      "date": today,
+      "date": joinDate,
       "roomNumber": newRoomNumber,
     })
   })
@@ -104,7 +109,6 @@ const displayCustomerRoomDashboard = () => {
     customer.getTotalAmountSpentOnRooms().then(() => {
       let totalCost = customer.calculateRoomTotal();
       totalAmountSpentDisplay.innerText = `$${totalCost}`
-
       customer.pastReservations.forEach((elem) => {
         pastReservationsSection.insertAdjacentHTML('afterEnd', `
         <p>Date of your Stay: ${elem.date} Room Number: ${elem.roomNumber}`)
@@ -116,6 +120,24 @@ const displayCustomerRoomDashboard = () => {
     })
   })
 }
+
+const displayNewDashBoard = () => {
+  displayCustomerDashboardView();
+  customer.findNewBookings().then(() => {
+    pastReservationsSection.insertAdjacentHTML('afterEnd', ``)
+    upcomingReservationsSection.insertAdjacentHTML('afterEnd', ``)
+    customer.rearrangeDate();
+    customer.getTotalAmountSpentOnRooms().then(() => {
+      let totalCost = customer.calculateRoomTotal();
+      totalAmountSpentDisplay.innerText = `$${totalCost}`
+      let endIndex = customer.upcomingReservations.length -1
+        showJustBookedHeader();
+        justBookedDisplay.insertAdjacentHTML('afterEnd', `
+        <p>Date of your Stay: ${customer.upcomingReservations[endIndex].date} Room Number: ${customer.upcomingReservations[endIndex].roomNumber}`)
+      })
+    })
+  }
+
 
 
 const displayBookARoomInformation = () => {
@@ -225,7 +247,7 @@ const showBookARoomView = () => {
 }
 
 const displayRoomHasBeenBooked = () => {
-  show([roomHasBeenBookedDisplay, homeBtn])
+  show([roomHasBeenBookedDisplay, homeBtn, customerDashboardBtn])
   hide([roomsAvailableDisplay, dropDownBtn])
 }
 
@@ -241,11 +263,15 @@ const displayHomePage = () => {
 
 const displayCustomerDashboardView = () => {
   show([customerDashboardView, homeBtn, bookARoomBtn])
-  hide([homePageView, customerLoginBtn, loginForm])
+  hide([homePageView, customerLoginBtn, loginForm, roomHasBeenBookedDisplay, customerDashboardBtn, bookARoomView])
 }
 
 const displayLoginForm = () => {
   show([loginForm])
+}
+
+const showJustBookedHeader = () => {
+  show([justBookedDisplay])
 }
 
 //EVENT LISTENERS
@@ -253,7 +279,9 @@ const displayLoginForm = () => {
 window.addEventListener('load', loadPage);
 bookARoomBtn.addEventListener('click', displayBookARoomCalendar);
 dateSelectBtn.addEventListener('click', displayBookARoomInformation);
+dropDownBtn.addEventListener('click', showDropDown)
 myDropdown.addEventListener('click', searchByRoomTypes);
 homeBtn.addEventListener('click', displayHomePage);
 customerLoginBtn.addEventListener('click', displayLoginForm);
 loginFormBtn.addEventListener('click', customerLogin);
+customerDashboardBtn.addEventListener('click', displayNewDashBoard)

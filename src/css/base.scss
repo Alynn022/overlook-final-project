@@ -36,6 +36,7 @@ nav {
 }
 
 #content form input[type="submit"],
+.customer-dashboard-btn,
 .customer-login-btn, 
 .home-btn,
 .book-a-room-btn,
@@ -45,7 +46,8 @@ nav {
 
 .customer-login-btn, 
 .home-btn,
-.book-a-room-btn {
+.book-a-room-btn,
+.customer-dashboard-btn {
   width: 140px;
   height: 45px;
 }
@@ -66,7 +68,9 @@ nav {
 .home-btn:hover, 
 .home-btn:focus,
 .book-a-room-btn:hover,
-.book-a-room-btn:focus {
+.book-a-room-btn:focus,
+.customer-dashboard-btn:hover,
+.customer-dashboard-btn:focus {
   background-color: $border-color;
   box-shadow: 0px 15px 20px #0F5298;
   color: #fff;
