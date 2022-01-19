@@ -14,7 +14,6 @@ class Bookings {
   getData = () => {
     return Promise.all([fetchApiData('bookings'), fetchApiData('rooms'), fetchApiData('customers')])
   }
-
   showCustomerRoomAvailability(userInput) {
     return this.getData()
     .then((data) => {
@@ -60,12 +59,5 @@ class Bookings {
   }
   
 }
-
-//I want to make the bookThisRoomBtn.value dynamic by passing in the value as 
-  //parameter 
-  //I want to creat a fetch and post method for the individual info. 
-  //based on the customer UserID 
-  //I need this to post 
-  //{ "userID": 48, "date": "2019/09/23", "roomNumber": 4 }
 
 export default Bookings;

@@ -18,7 +18,6 @@
     <h1 class="homepage-title">Overlook Hotel Bookings</h1>
   </header>
   <article class="home-page-view" id="homePageView">
-
     <div class="container hidden" id="loginForm">
       <section id="content">
         <form action="">
@@ -32,10 +31,9 @@
           <div>
             <input type="submit" value="Log in" id="loginFormBtn"/>
           </div>
-        </form><!-- form -->
-        
-      </section><!-- content -->
-    </div><!-- container -->
+        </form>
+      </section>
+    </div>
     <img src="./images/img1.jpg" alt="hotel main lobby" style="width:100%">
     <img src="./images/img2.jpg" alt="hotel pool side" style="width:100%">
     <img src="./images/img3.jpg" alt="hotel pool side restaurant" style="width:100%">
@@ -55,7 +53,7 @@
     <label for="start">Find a booking date:</label>
     <input type="date" id="start" name="trip-start"
        value=""
-       min="2022-01-16" max="2022-12-31"/>
+       min="2022-01-18" max="2022-12-31"/>
        <button id="dateSelectBtn" [disabled]="!myInput.value">Search Dates</button>
        <div class="dropdown">
         <button id="dropDownBtn" class="dropbtn hidden">Filter By Room Type</button>
@@ -72,10 +70,6 @@
           <h1>Your Room Has Been Booked! Please select another date to book.</h1>
       </article>
   </article>
-  
-  
-  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
-  
 </body>
 </html>
